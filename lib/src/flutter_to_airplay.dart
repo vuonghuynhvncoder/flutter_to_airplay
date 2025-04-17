@@ -10,7 +10,8 @@ class FlutterToAirplay {
   final EventChannel _eventChannel = EventChannel('airplay_status_channel');
 
   Stream<AirPlay?> airplay() {
-    return _eventChannel.receiveBroadcastStream().map((argument) => AirPlay.fromMap(argument));
+    return _eventChannel.receiveBroadcastStream().map((argument) => AirPlay.fromMap(
+        argument == null ? null : Map<String, dynamic>.from(argument)));
   }
 
   void triggerAirPlay() {
