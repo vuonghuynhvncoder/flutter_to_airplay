@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_to_airplay/src/flutter_to_airplay.dart';
+import 'package:flutter_to_airplay/src/utils.dart';
 
 /// This widget returns an AirplayRoutePicker button from native code,
 /// it can be added as a button or as an app bar icon, just like any widget.
@@ -63,15 +64,15 @@ class AirPlayRoutePickerView extends StatefulWidget {
       'prioritizesVideoDevices': prioritizesVideoDevices,
 
       // if tintColor is not provided, do not process this.
-      if (tintColor != null) 'tintColor': FlutterToAirplay.colorToParams(tintColor!),
+      if (tintColor != null) 'tintColor': Utils.colorToParams(tintColor!),
 
       // if activeTintColor is not provided, do not process this.
       if (activeTintColor != null)
-        'activeTintColor': FlutterToAirplay.colorToParams(activeTintColor!),
+        'activeTintColor': Utils.colorToParams(activeTintColor!),
 
       // if backgroundColor is not provided, do not process this.
       if (backgroundColor != null)
-        'backgroundColor': FlutterToAirplay.colorToParams(backgroundColor!),
+        'backgroundColor': Utils.colorToParams(backgroundColor!),
     };
   }
 

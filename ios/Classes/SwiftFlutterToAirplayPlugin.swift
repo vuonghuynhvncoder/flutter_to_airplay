@@ -70,16 +70,26 @@ public class SwiftFlutterToAirplayPlugin: NSObject, FlutterPlugin, FlutterStream
     
     func sendAirplayStatus() {
         let session = AVAudioSession.sharedInstance()
-        let isAirPlayConnected = session.currentRoute.outputs.contains {
-            $0.portType == .airPlay
+        let airplay = session.currentRoute.outputs.first { item in
+            item.portType == .airPlay
         }
         // Send AirPlay status to Flutter
-        eventSink?(isAirPlayConnected)
+        eventSink?(airplay?.toDict())
     }
     
     public func onCancel(withArguments arguments: Any?) -> FlutterError? {
         self.eventSink = nil
         NotificationCenter.default.removeObserver(self)
         return nil
+    }
+}
+
+
+extension AVAudioSessionPortDescription {
+    func toDict() -> Dictionary<String, Any> {
+        var dict = [String : Any]()
+        dict["uid"] = self.uid
+        dict["portName"] = self.portName
+        return dict
     }
 }
