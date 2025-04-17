@@ -73,6 +73,9 @@ public class SwiftFlutterToAirplayPlugin: NSObject, FlutterPlugin, FlutterStream
         let airplay = session.currentRoute.outputs.first { item in
             item.portType == .airPlay
         }
+        if let airplay {
+            print("airplay: {uid: \(airplay.uid), portName: \(airplay.portName)}, debug: \(airplay.debugDescription)")
+        }
         // Send AirPlay status to Flutter
         eventSink?(airplay?.toDict())
     }
